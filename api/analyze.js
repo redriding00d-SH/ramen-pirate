@@ -1,7 +1,25 @@
+// Simple in-memory scan counter (resets on cold starts)
+let scanCount = 0;
+
 export default async function handler(req, res) {
   // Only allow POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // Rate limiting: Only if MAX_SCANS env variable is set (configure in Vercel)
+  const maxScans = process.env.MAX_SCANS ? parseInt(process.env.MAX_SCANS) : null;
+
+  if (maxScans) {
+    scanCount++;
+    console.log(`Scan count: ${scanCount}/${maxScans}`);
+
+    if (scanCount > maxScans) {
+      return res.status(429).json({
+        error: 'Scan limit reached',
+        message: 'This demo has reached its maximum number of scans. Thank you for trying Ramen Pirate!'
+      });
+    }
   }
 
   const { image } = req.body;

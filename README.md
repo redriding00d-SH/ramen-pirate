@@ -2,15 +2,6 @@
 
 Scan ramen nutrition labels and get AI-powered health insights with a pirate rating system.
 
-## Quick Start
-
-```bash
-npm install
-npm run dev
-```
-
-Open `http://localhost:5173`
-
 ## Features
 
 - 📱 Tap barcode to scan nutrition labels
@@ -21,17 +12,28 @@ Open `http://localhost:5173`
 ## Tech Stack
 
 - Vanilla JS + Vite
-- OpenAI Vision API (not connected yet)
-- Vercel serverless functions (coming soon)
+- OpenAI Vision API (gpt-4o)
+- Vercel serverless functions
 
-## Status
+## Quick Start
 
-✅ UI complete
-⏳ API integration pending
+```bash
+npm install
+npm run dev
+```
 
-## Deploy
+Open `http://localhost:5173`
 
-Designed for Vercel. Guide coming soon.
+## Deploy to Vercel
+
+```bash
+vercel
+```
+
+### Environment Variables (set in Vercel):
+
+- `OPENAI_API_KEY` - Your OpenAI API key (required)
+- `MAX_SCANS` - Optional scan limit (e.g., 50)
 
 ---
 

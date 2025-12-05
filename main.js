@@ -127,6 +127,10 @@ async function analyzeRamenLabel(base64Image) {
         });
 
         if (!response.ok) {
+            const error = await response.json();
+            if (response.status === 429) {
+                throw new Error(error.message || 'Scan limit reached');
+            }
             throw new Error('API request failed');
         }
 
