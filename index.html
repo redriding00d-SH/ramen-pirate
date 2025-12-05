@@ -11,23 +11,18 @@
         <!-- Intro Screen -->
         <div id="intro-screen" class="screen active">
             <header class="logo">
-                <div class="logo-icon">🍜</div>
-                <h1>ramen pirate</h1>
+                <img src="/assets/logo.svg" alt="Ramen Pirate Logo" class="logo-image">
             </header>
 
-            <div class="barcode-container">
-                <div class="barcode-icon">
-                    <svg viewBox="0 0 154 154" fill="currentColor">
-                        <path d="M10 10h134v134H10z" stroke="currentColor" stroke-width="2" fill="none"/>
-                        <path d="M20 30h20v94H20zM45 30h8v94h-8zM58 30h12v94H58zM75 30h6v94h-6zM86 30h10v94h-10zM101 30h8v94h-8zM114 30h20v94h-20z"/>
-                    </svg>
-                </div>
-                <div class="sparkle">✨</div>
+            <p class="intro-text">
+                Beware...of the Ramen addiction. Scan your ingredient list for piracy levels:
+            </p>
+
+            <div class="barcode-container" id="barcode-trigger">
+                <img src="/assets/Barcode.svg" alt="Barcode" class="barcode-icon">
             </div>
 
-            <button id="scan-btn" class="scan-button">
-                + scan your ramen
-            </button>
+            <p class="tap-instruction">Tap to scan</p>
 
             <input type="file" id="camera-input" accept="image/*" capture="environment" style="display: none;">
         </div>
@@ -35,26 +30,26 @@
         <!-- Result Screen -->
         <div id="result-screen" class="screen">
             <header class="logo">
-                <div class="logo-icon">🍜</div>
-                <h1>ramen pirate</h1>
+                <img src="/assets/logo.svg" alt="Ramen Pirate Logo" class="logo-image">
             </header>
 
             <div class="pirate-level">
-                <h2>Pirate level</h2>
                 <div class="pirate-flags">
-                    <span class="flag">🏴‍☠️</span>
-                    <span class="flag">🏴‍☠️</span>
-                    <span class="flag">🏴‍☠️</span>
+                    <img src="/assets/pirate-rate-empty.svg" alt="Pirate" class="pirate-icon" data-index="0">
+                    <img src="/assets/pirate-rate-empty.svg" alt="Pirate" class="pirate-icon" data-index="1">
+                    <img src="/assets/pirate-rate-empty.svg" alt="Pirate" class="pirate-icon" data-index="2">
+                    <img src="/assets/pirate-rate-empty.svg" alt="Pirate" class="pirate-icon" data-index="3">
+                    <img src="/assets/pirate-rate-empty.svg" alt="Pirate" class="pirate-icon" data-index="4">
                 </div>
             </div>
 
             <div class="nutrition-info">
                 <div class="info-row">
-                    <span class="label mono">Salt/Sodium</span>
+                    <span class="label">Salt/Sodium</span>
                     <span class="value" id="sodium-value">-- mg</span>
                 </div>
                 <div class="info-row">
-                    <span class="label mono">Allergens</span>
+                    <span class="label">Allergens</span>
                     <span class="value" id="allergens-value">--</span>
                 </div>
                 <div class="info-row">
@@ -71,11 +66,7 @@
                 Scanning your ramen...
             </div>
 
-            <div class="emoji-face">(๑-﹏-๑)</div>
-
-            <button id="scan-again-btn" class="scan-button">
-                Scan Another
-            </button>
+            <p class="scan-note">To scan another, click on Logo to return.</p>
         </div>
 
         <!-- Loading Overlay -->

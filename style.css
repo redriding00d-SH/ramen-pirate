@@ -12,7 +12,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background-color: #000;
     color: #fff;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 #app {
@@ -28,6 +28,7 @@ body {
     min-height: 100vh;
     padding: 26px 30px;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .screen.active {
@@ -38,90 +39,89 @@ body {
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
     margin-bottom: 40px;
 }
 
-.logo-icon {
-    font-size: 42px;
-    line-height: 1;
+.logo-image {
+    height: 80px;
+    width: auto;
 }
 
-.logo h1 {
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: 0;
+#result-screen .logo {
+    cursor: pointer;
+}
+
+#result-screen .logo:hover .logo-image {
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+/* Intro Text */
+.intro-text {
+    text-align: center;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    color: #fff;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Barcode Container */
 .barcode-container {
-    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    margin-bottom: 40px;
+    margin: 60px 0 20px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.barcode-container:hover {
+    transform: scale(1.05);
+}
+
+.barcode-container:active {
+    transform: scale(0.98);
 }
 
 .barcode-icon {
-    width: 154px;
-    height: 154px;
-    color: #fff;
+    width: 240px;
+    height: 240px;
+    border: 1px solid #fff;
+    padding: 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
-.sparkle {
-    position: absolute;
-    top: 10%;
-    right: 30%;
-    font-size: 24px;
-    animation: sparkle 2s ease-in-out infinite;
+/* Tap Instruction */
+.tap-instruction {
+    text-align: center;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+    margin-top: 0;
 }
 
-@keyframes sparkle {
-    0%, 100% { opacity: 0.5; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.2); }
-}
-
-/* Buttons */
-.scan-button {
-    width: 100%;
-    padding: 12px 24px;
-    background: #fff;
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.scan-button:hover {
-    background: #f0f0f0;
-    transform: translateY(-2px);
-}
-
-.scan-button:active {
-    transform: translateY(0);
-}
 
 /* Result Screen */
 .pirate-level {
     text-align: center;
-    margin-bottom: 30px;
-}
-
-.pirate-level h2 {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 35px;
 }
 
 .pirate-flags {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     justify-content: center;
-    font-size: 33px;
+    align-items: center;
+}
+
+.pirate-icon {
+    width: 42px;
+    height: 42px;
 }
 
 /* Nutrition Info */
@@ -132,9 +132,10 @@ body {
 .info-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: 12px 0;
     border-bottom: 1px solid #333;
+    gap: 15px;
 }
 
 .info-row:last-child {
@@ -144,35 +145,39 @@ body {
 .info-row .label {
     font-size: 16px;
     font-weight: 600;
-}
-
-.info-row .label.mono {
-    font-family: 'Courier New', Courier, monospace;
+    flex-shrink: 0;
 }
 
 .info-row .value {
     font-size: 16px;
     font-weight: 500;
+    text-align: right;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 60%;
 }
 
 /* Summary */
 .summary {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 20px;
-    border-radius: 8px;
-    font-size: 15px;
-    line-height: 1.5;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: 17px;
+    line-height: 1.6;
     margin-bottom: 20px;
-    min-height: 80px;
+    min-height: auto;
+    text-align: left;
 }
 
-/* Emoji Face */
-.emoji-face {
+/* Scan Note */
+.scan-note {
     text-align: center;
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 30px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+    margin-top: 10px;
 }
+
 
 /* Loading Overlay */
 .loading-overlay {

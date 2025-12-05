@@ -1,8 +1,7 @@
 // DOM Elements
 const introScreen = document.getElementById('intro-screen');
 const resultScreen = document.getElementById('result-screen');
-const scanBtn = document.getElementById('scan-btn');
-const scanAgainBtn = document.getElementById('scan-again-btn');
+const barcodeTrigger = document.getElementById('barcode-trigger');
 const cameraInput = document.getElementById('camera-input');
 const loading = document.getElementById('loading');
 
@@ -14,11 +13,13 @@ const spiceValue = document.getElementById('spice-value');
 const summaryText = document.getElementById('summary-text');
 
 // Event Listeners
-scanBtn.addEventListener('click', () => {
+barcodeTrigger.addEventListener('click', () => {
     cameraInput.click();
 });
 
-scanAgainBtn.addEventListener('click', () => {
+// Make logo on result screen clickable to return to intro
+const resultLogo = resultScreen.querySelector('.logo');
+resultLogo.addEventListener('click', () => {
     showScreen('intro');
 });
 
@@ -90,6 +91,30 @@ async function analyzeRamenLabel(base64Image) {
     // TODO: Replace with your API endpoint (serverless function)
     const API_ENDPOINT = '/api/analyze';
 
+    /* AI PROMPT TO USE:
+     * "Analyze this ramen nutrition label and extract the following information:
+     * 1. Salt/Sodium content (in mg)
+     * 2. Allergens (list all allergens found)
+     * 3. Additives (count the total number of food additives/E-numbers)
+     * 4. Spice level (estimate: low, moderate, high, very high)
+     * 5. Calculate a 'Pirate Level' score from 0-5 using this RAMEN-SPECIFIC rubric:
+     *    (Note: Average instant ramen contains ~1700mg sodium)
+     *    - 5: <1000mg sodium, natural ingredients, minimal allergens (healthy ramen options)
+     *    - 4: 1000-1400mg sodium, few additives, some allergens (below average)
+     *    - 3: 1400-2000mg sodium, standard additives, common allergens (typical instant ramen)
+     *    - 2: 2000-2500mg sodium, concerning additives (MSG, artificial colors), many allergens (above average)
+     *    - 1: 2500-3000mg sodium, many harmful additives, severe allergen concerns (very unhealthy)
+     *    - 0: >3000mg sodium (130%+ daily value), toxic additive levels (extreme/dangerous)
+     *
+     * Then provide a 1-2 sentence cautionary summary that:
+     * - Warns about sodium levels with % of daily value (daily limit = 2300mg)
+     * - Mentions additive count and EXPLAINS what the most concerning additives are (with E-numbers) and their potential health effects
+     * - Mentions specific allergen warnings
+     * - Notes spice level if relevant
+     *
+     * Return as JSON: { sodium, allergens, additives (as number), spiceLevel, pirateLevel, summary }"
+     */
+
     try {
         const response = await fetch(API_ENDPOINT, {
             method: 'POST',
@@ -113,11 +138,11 @@ async function analyzeRamenLabel(base64Image) {
 
         // Mock data for development/testing
         return {
-            sodium: '450 mg',
-            allergens: 'wheat, soy',
-            additives: 'moderate',
+            sodium: '1850 mg',
+            allergens: 'wheat, soy, sesame',
+            additives: '3',
             spiceLevel: 'high',
-            summary: 'This ramen contains high sodium levels. If you have hypertension, consider consuming in moderation. Contains common allergens like wheat and soy.',
+            summary: 'Average sodium content (80% daily value). Contains 3 additives including MSG (E621) which is a flavor enhancer that may cause sensitivity, and caramel coloring (E150c) linked to potential health concerns.',
             pirateLevel: 3
         };
     }
@@ -132,9 +157,16 @@ function displayResults(data) {
     summaryText.textContent = data.summary || 'No summary available.';
 
     // Update pirate flags based on pirate level
-    const pirateFlags = document.querySelector('.pirate-flags');
-    const level = data.pirateLevel || 2;
-    pirateFlags.innerHTML = '🏴‍☠️'.repeat(Math.min(level, 5));
+    const pirateIcons = document.querySelectorAll('.pirate-icon');
+    const level = Math.min(data.pirateLevel || 0, 5);
+
+    pirateIcons.forEach((icon, index) => {
+        if (index < level) {
+            icon.src = '/assets/pirate-rate-full.svg';
+        } else {
+            icon.src = '/assets/pirate-rate-empty.svg';
+        }
+    });
 }
 
 // Initialize app
