@@ -43,14 +43,14 @@ export default async function handler(req, res) {
 2. Allergens (list all allergens found)
 3. Additives (count the total number of food additives/E-numbers)
 4. Spice level (estimate: low, moderate, high, very high)
-5. Calculate a 'Pirate Level' score from 0-5 using this RAMEN-SPECIFIC rubric:
-   (Note: Average instant ramen contains ~1700mg sodium)
-   - 5: <1000mg sodium, natural ingredients, minimal allergens (healthy ramen options)
-   - 4: 1000-1400mg sodium, few additives, some allergens (below average)
-   - 3: 1400-2000mg sodium, standard additives, common allergens (typical instant ramen)
-   - 2: 2000-2500mg sodium, concerning additives (MSG, artificial colors), many allergens (above average)
-   - 1: 2500-3000mg sodium, many harmful additives, severe allergen concerns (very unhealthy)
-   - 0: >3000mg sodium (130%+ daily value), toxic additive levels (extreme/dangerous)
+5. Calculate a 'Pirate Level' score from 0-5 using this RAMEN-SPECIFIC rubric (MORE SKULLS = MORE DANGEROUS):
+   (Based on research: Average ramen = 1500-2000mg, WHO limit = 2000mg, FDA limit = 2300mg)
+   - 0: <800mg sodium, natural ingredients, minimal allergens (very healthy)
+   - 1: 800-1500mg sodium, few additives (below average, meets AHA recommendation)
+   - 2: 1500-2000mg sodium, standard additives, common allergens (average ramen, WHO limit)
+   - 3: 2000-2500mg sodium, concerning additives, exceeds WHO limit, near FDA limit
+   - 4: 2500-3500mg sodium, many harmful additives, significantly exceeds FDA limit (very unhealthy)
+   - 5: >3500mg sodium, toxic additive levels (extreme/dangerous)
 
 Then provide a 1-2 sentence cautionary summary that:
 - Warns about sodium levels with % of daily value (daily limit = 2300mg)
