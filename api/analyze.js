@@ -35,7 +35,11 @@ export default async function handler(req, res) {
   }
 
   const prompt = `Analyze this ramen nutrition label and extract the following information:
-1. Salt/Sodium content (in mg)
+1. Salt/Sodium content - READ CAREFULLY:
+   - Look for "Salz" or "Salt" or "Sodium" fields
+   - Convert to mg: if listed as "4.5g" or "4,5g" = 4500mg (multiply grams by 1000)
+   - If listed as "Natrium" (sodium), that's already the sodium content
+   - Return ONLY the number in mg format like "4500 mg"
 2. Allergens (list all allergens found)
 3. Additives (count the total number of food additives/E-numbers)
 4. Spice level (estimate: low, moderate, high, very high)
