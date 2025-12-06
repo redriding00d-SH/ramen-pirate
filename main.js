@@ -166,9 +166,9 @@ function displayResults(data) {
 
     pirateIcons.forEach((icon, index) => {
         if (index < level) {
-            icon.src = '/pirate-rate-full.svg';
+            icon.src = '/full-point.png';
         } else {
-            icon.src = '/pirate-rate-empty.svg';
+            icon.src = '/empty-point.png';
         }
     });
 }
