@@ -2,6 +2,8 @@
 
 Scan ramen nutrition labels and get AI-powered health insights with a pirate rating system.
 
+[View Figma Design](https://www.figma.com/design/gw6hU2vkPAkF6WwscnpGBL/Ramen-pirate?node-id=0-1&t=T0qfh88dzrLrwsp7-1)
+
 ## Features
 
 - 📱 Tap barcode to scan nutrition labels
